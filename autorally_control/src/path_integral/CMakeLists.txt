@@ -27,7 +27,8 @@ if(CUDA_FOUND)
       -std=c++11
       -maxrregcount=32;
       -O3;
-      -arch=sm_35;
+#      -arch=sm_35;
+      -arch=sm_72;  # TODO: refactor to fetch the arch value (the cuda computation capability of the target system)
       -w
   )
 
