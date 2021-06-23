@@ -19,6 +19,7 @@ containsElement () {
   return 1
 }
 
+echo "WE ARE HERE"
 # Get list of devices connected to computer
 if [[ $MASTER_HOSTNAME == "localhost" ]]
     then
