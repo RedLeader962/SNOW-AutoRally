@@ -19,7 +19,8 @@ containsElement () {
   return 1
 }
 
-echo "WE ARE HERE"
+#echo "WE ARE HERE"  # TODO: remove line when done
+
 # Get list of devices connected to computer
 if [[ $MASTER_HOSTNAME == "localhost" ]]
     then
