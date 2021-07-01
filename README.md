@@ -3,7 +3,10 @@
 A Georgia Tech AutoRally fork for the SNOW-AutoRally project at NorLab
 
 ![norlab logo acronym dark](images/norlab_logo_acronym_dark.png)
-<img src="images/norlab_logo_acronym_dark.png" width="100">
+
+<p>
+<img src="./images/norlab_logo_acronym_dark.png" width="100">
+</p>
 
 
 
