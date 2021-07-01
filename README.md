@@ -1,9 +1,9 @@
-# _/// SNOW-AutoRally //////////////////////////////////////_
-
-A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.com/AutoRally/autorally) repository 
 <p>
 <img src="./images/norlab_logo_acronym_dark.png" width="200">
 </p>
+
+# _/// SNOW-AutoRally //////////////////////////////////////_
+A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.com/AutoRally/autorally) repository 
 
 
 
