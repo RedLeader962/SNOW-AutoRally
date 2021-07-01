@@ -1,9 +1,8 @@
-<p>
-<img src="./images/norlab_logo_acronym_dark.png" width="200">
-</p>
 
-# _/// SNOW-AutoRally //////////////////////////////////////_
+# _/// SNOW-AutoRally /////////////////////////////////////////_
 A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.com/AutoRally/autorally) repository 
+
+<p> <img src="./images/norlab_logo_acronym_dark.png" width="200"> </p>
 
 Project link: 
 - [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
