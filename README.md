@@ -4,7 +4,7 @@ A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.
 
 <p> <img src="./images/norlab_logo_acronym_dark.png" width="200"> </p>
 
-Project link: 
+#### Project link: 
 - [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
 - [Dockerized SNOW](https://github.com/RedLeader962/SNOW_AutoRally)
 
@@ -21,7 +21,7 @@ diagram)
 </p>
 <br>
 
-Georgia Tech AUtoRally links:
+#### Georgia Tech AUtoRally links:
 - [Original readme (modified)](README.md) 
 - [AutoRally/autorally: Software for the AutoRally platform](https://github.com/AutoRally/autorally)
 - [Home · AutoRally/autorally Wiki](https://github.com/AutoRally/autorally/wiki)
