@@ -31,6 +31,8 @@ if(CUDA_FOUND)
       -arch=sm_72;  # TODO: refactor to fetch the arch value (the cuda computation capability of the target system)
       -w
   )
+    # TODO: Refactor to fetch the cuda computation capability of the target system
+    #       Use env variable: $JETSON_CUDA_ARCH_BIN
 
   ####################################################################################
   #Executable for the basis function model
