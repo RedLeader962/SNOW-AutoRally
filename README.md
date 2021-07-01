@@ -1,6 +1,10 @@
 # _/// SNOW-AutoRally //////////////////////////////////////_
 
-A Georgia Tech AutoRally fork  
+A Georgia Tech AutoRally fork for the SNOW-AutoRally project at NorLab
+
+![norlab logo acronym dark](images/norlab_logo_acronym_dark.png)
+<img src="images/norlab_logo_acronym_dark.png" width="100">
+
 
 
 <br>
@@ -15,3 +19,8 @@ A Georgia Tech AutoRally fork
 diagram)
 </p>
 <br>
+
+References:
+- [Original readme (modified)](README.md) 
+- [AutoRally/autorally: Software for the AutoRally platform](https://github.com/AutoRally/autorally)
+- [Home · AutoRally/autorally Wiki](https://github.com/AutoRally/autorally/wiki)
