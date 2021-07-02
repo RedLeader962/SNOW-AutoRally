@@ -29,7 +29,7 @@ diagram)
 
 ---
 
-# Test AutoRally Configuration in Gazebo (**Revised instruction**)
+# Test AutoRally Configuration (**Revised instruction**)
 
 ## 1. Start AutoRally simulator
 
