@@ -6,7 +6,7 @@ A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.
 
 #### Project link: 
 - [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
-- [Dockerized SNOW](https://github.com/RedLeader962/SNOW_AutoRally)
+- [Dockerized SNOW](https://github.com/RedLeader962/Dockerized_SNOW)
 
 <br>
 <p>
