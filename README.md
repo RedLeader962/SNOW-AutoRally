@@ -27,7 +27,7 @@ diagram )
 - [Dockerized SNOW](https://github.com/RedLeader962/Dockerized_SNOW)
 
 
-#### Georgia Tech AUtoRally links:
+#### Georgia Tech AutoRally links:
 - [Original readme (modified)](README.md) 
 - [AutoRally/autorally: Software for the AutoRally platform](https://github.com/AutoRally/autorally)
 - [Home · AutoRally/autorally Wiki](https://github.com/AutoRally/autorally/wiki)
