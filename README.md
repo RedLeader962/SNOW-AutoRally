@@ -4,10 +4,6 @@ A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.
 
 <p> <img src="./images/norlab_logo_acronym_dark.png" width="200"> </p>
 
-#### Project link: 
-- [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
-- [Dockerized SNOW](https://github.com/RedLeader962/Dockerized_SNOW)
-
 <br>
 <p>
 <a href="https://viewer.diagrams.net/?target=blank&highlight=0000ff&title=Georgia_Tech_AutoRally_v1.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FRedLeader962%2Fautorally%2FSNOW-melodic-devel%2Fdrawio%2FGeorgia_Tech_AutoRally_v1.drawio">
@@ -24,6 +20,12 @@ fullscreen
 diagram )
 </p>
 <br>
+
+---
+#### Project link: 
+- [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
+- [Dockerized SNOW](https://github.com/RedLeader962/Dockerized_SNOW)
+
 
 #### Georgia Tech AUtoRally links:
 - [Original readme (modified)](README.md) 
