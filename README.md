@@ -1,32 +1,48 @@
+<div align="center">
+<a href="https://norlab.ulaval.ca/research/">
+<img src="./images/norlab_logo_acronym_dark.png" width="200">
+</a>
+<br>
+</div>
 
 # _/// SNOW-AutoRally //////////////////////////////////////////_
 A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.com/AutoRally/autorally) repository 
 
-<p> <img src="./images/norlab_logo_acronym_dark.png" width="200"> </p>
-
+<div align="left">
+<p>
+<sup>
+<b>Project related link: </b> &nbsp; 
+<a href="https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3">NLSAR - NorLab SNOW AutoRally</a>
+(Youtrack) &nbsp; • &nbsp;  
+<a href="https://github.com/RedLeader962/Dockerized_SNOW">Dockerized SNOW</a>
+(GitHub)
+&nbsp;
+</sup>
+</p>
+</div>
 <br>
+<div align="center">
 <p>
 <a href="https://viewer.diagrams.net/?target=blank&highlight=0000ff&title=Georgia_Tech_AutoRally_v1.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FRedLeader962%2Fautorally%2FSNOW-melodic-devel%2Fdrawio%2FGeorgia_Tech_AutoRally_v1.drawio">
 <img src="drawio/Georgia_Tech_AutoRally_v1.png" alt="The Georgia_Tech_AutoRally_v1.png diagram">
 </a>
 </p>
-<p>
-( 
+
+<sub>
+(&nbsp; View diagram  
 <a href="https://viewer.diagrams.net/?target=blank&highlight=0000ff&title=Georgia_Tech_AutoRally_v1.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FRedLeader962%2Fautorally%2FSNOW-melodic-devel%2Fdrawio%2FGeorgia_Tech_AutoRally_v1.drawio">
 fullscreen
 </a>
-  |  <a href="https://app.diagrams.net/?mode=github#HRedLeader962%2Fautorally%2FSNOW-melodic-devel%2Fdrawio%2FGeorgia_Tech_AutoRally_v1.drawio" target="_blank" rel="noopener noreferrer">edit
+&nbsp; • &nbsp;
+<a href="https://app.diagrams.net/?mode=github#HRedLeader962%2Fautorally%2FSNOW-melodic-devel%2Fdrawio%2FGeorgia_Tech_AutoRally_v1.drawio" target="_blank" rel="noopener noreferrer">edit
 </a>
-diagram )
-</p>
+diagram &nbsp;)
+</sub>
+</div>
 <br>
 
+
 ---
-#### Project link: 
-- [Youtrack](https://redleader.myjetbrains.com/youtrack/dashboard?id=bce3112d-bda1-425c-8628-802a047be4d3) dashboard
-- [**Dockerized SNOW**](https://github.com/RedLeader962/Dockerized_SNOW)
-
-
 #### Georgia Tech AutoRally links:
 - [Original readme (modified)](README.md) 
 - [AutoRally/autorally: Software for the AutoRally platform](https://github.com/AutoRally/autorally)
