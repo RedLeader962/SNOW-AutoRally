@@ -261,5 +261,3 @@ rosservice call /gazebo/pause_physics
 # Resume physics updates.
 rosservice call /gazebo/unpause_physics
 ```
-
-
