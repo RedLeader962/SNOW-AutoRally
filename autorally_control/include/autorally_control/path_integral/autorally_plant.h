@@ -54,6 +54,11 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Point.h>
 
+// ❯❯❯ SNOW-AutoRally refactor ❯❯❯......................................................................................
+#include <geometry_msgs/Twist.h>
+#include <autorally_msgs/hri_cmd_vel.h>
+// ......................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
+
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
 
@@ -268,6 +273,12 @@ protected:
   geometry_msgs::Point time_delay_msg_; ///< Point message for publishing the observed delay.
   autorally_msgs::pathIntegralStatus status_msg_; ///<pathIntegralStatus message for publishing mppi status
   autorally_msgs::pathIntegralTiming timingData_; ///<pathIntegralStatus message for publishing mppi status
+
+  // ❯❯❯ SNOW-AutoRally refactoring ❯❯❯.................................................................................
+//  geometry_msgs::Twist hri_cmd_vel_msg_; ///< SNOW-AutoRally Command velocity message .
+  // .................................................................................❮❮❮ SNOW-AutoRally refactoring ❮❮❮
+
+
 };
 
 }

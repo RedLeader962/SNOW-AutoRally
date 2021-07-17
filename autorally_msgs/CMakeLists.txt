@@ -15,6 +15,9 @@ add_message_files(
   DIRECTORY msg
   FILES
   chassisCommand.msg
+  # ❯❯❯ SNOW-AutoRally refactor ❯❯❯.....................................................................................
+  hri_cmd_vel.msg
+  # .....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   chassisState.msg
   wheelSpeeds.msg
   runstop.msg

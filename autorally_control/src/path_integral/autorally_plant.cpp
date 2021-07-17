@@ -52,7 +52,10 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   stateSequence_.resize(AUTORALLY_STATE_DIM*numTimesteps_);
 
   //Initialize the publishers.
-  control_pub_ = mppi_node.advertise<autorally_msgs::chassisCommand>("chassisCommand", 1);
+  // ❯❯❯ SNOW-AutoRally refactor ❯❯❯....................................................................................
+//  control_pub_ = mppi_node.advertise<autorally_msgs::chassisCommand>("chassisCommand", 1);
+  control_pub_ = mppi_node.advertise<autorally_msgs::hri_cmd_vel>("hri_cmd_vel", 1);
+  // ....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   path_pub_ = mppi_node.advertise<nav_msgs::Path>("nominalPath", 1);
   subscribed_pose_pub_ = mppi_node.advertise<nav_msgs::Odometry>("subscribedPose", 1);
   status_pub_ = mppi_node.advertise<autorally_msgs::pathIntegralStatus>("mppiStatus", 1);
@@ -345,29 +348,71 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
   subscribed_pose_pub_.publish(subscribed_state);
 }
 
+// ❯❯❯ SNOW-AutoRally refactoring ❯❯❯...................................................................................
+// // ORIGINAL
+//void AutorallyPlant::pubControl(float steering, float throttle)
+//{
+//  autorally_msgs::chassisCommand control_msg; ///< Autorally control message initialization.
+//  //Publish the steering and throttle commands
+//  if (std::isnan(throttle) || std::isnan(steering)){ //Nan control publish zeros and exit.
+//    ROS_INFO("NaN Control Input Detected");
+//    control_msg.throttle = -.99;
+//    control_msg.steering = 0;
+//    control_msg.frontBrake = -5.0;
+//    control_msg.header.stamp = ros::Time::now();
+//    control_msg.sender = "mppi_controller";
+//    control_pub_.publish(control_msg);
+//    ros::shutdown(); //No use trying to recover, quitting is the best option.
+//  }
+//  else { //Publish the computed control input.
+//    control_msg.throttle = throttle;
+//    control_msg.steering = steering;
+//    control_msg.frontBrake = -5.0;
+//    control_msg.header.stamp = ros::Time::now();
+//    control_msg.sender = "mppi_controller";
+//    control_pub_.publish(control_msg);
+//  }
+//}
+
 void AutorallyPlant::pubControl(float steering, float throttle)
 {
-  autorally_msgs::chassisCommand control_msg; ///< Autorally control message initialization.
+  autorally_msgs::hri_cmd_vel control_msg; ///< SNOW-Autorally control message initialization.
   //Publish the steering and throttle commands
   if (std::isnan(throttle) || std::isnan(steering)){ //Nan control publish zeros and exit.
     ROS_INFO("NaN Control Input Detected");
-    control_msg.steering = 0;
-    control_msg.throttle = -.99;
-    control_msg.frontBrake = -5.0;
+//    control_msg.throttle = -.99;
+    control_msg.twist.linear.x = -.99;
+    control_msg.twist.linear.y = 0.0;
+    control_msg.twist.linear.z = 0.0;
+//    control_msg.steering = 0;
+    control_msg.twist.angular.x = 0.0;
+    control_msg.twist.angular.y = 0.0;
+    control_msg.twist.angular.z = 0.0;
+//    control_msg.frontBrake = -5.0;  // Not required by SNOW-AutoRally
     control_msg.header.stamp = ros::Time::now();
     control_msg.sender = "mppi_controller";
     control_pub_.publish(control_msg);
     ros::shutdown(); //No use trying to recover, quitting is the best option.
   }
   else { //Publish the computed control input.
-    control_msg.steering = steering;
-    control_msg.throttle = throttle;
-    control_msg.frontBrake = -5.0;
+//    control_msg.throttle = throttle;
+    control_msg.twist.linear.x = throttle;
+    control_msg.twist.linear.y = 0.0;
+    control_msg.twist.linear.z = 0.0;
+//    control_msg.steering = steering;
+    control_msg.twist.angular.x = 0.0;
+    control_msg.twist.angular.y = 0.0;
+    control_msg.twist.angular.z = steering;
+//    control_msg.frontBrake = -5.0;  // Not required by SNOW-AutoRally
     control_msg.header.stamp = ros::Time::now();
     control_msg.sender = "mppi_controller";
     control_pub_.publish(control_msg);
   }
 }
+
+
+// ...................................................................................❮❮❮ SNOW-AutoRally refactoring ❮❮❮
+
 
 void AutorallyPlant::pubStatus(const ros::TimerEvent&){
   boost::mutex::scoped_lock lock(access_guard_);
