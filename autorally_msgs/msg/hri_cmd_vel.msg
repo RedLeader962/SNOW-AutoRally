@@ -1,4 +1,4 @@
 Header header
 
 string sender
-Twist  twist
+geometry_msgs/Twist  twist
