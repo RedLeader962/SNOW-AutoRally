@@ -380,30 +380,30 @@ void AutorallyPlant::pubControl(float steering, float throttle)
   //Publish the steering and throttle commands
   if (std::isnan(throttle) || std::isnan(steering)){ //Nan control publish zeros and exit.
     ROS_INFO("NaN Control Input Detected");
-//    control_msg.throttle = -.99;
+//    control_msg.throttle = -.99;              // original
     control_msg.twist.linear.x = -.99;
     control_msg.twist.linear.y = 0.0;
     control_msg.twist.linear.z = 0.0;
-//    control_msg.steering = 0;
+//    control_msg.steering = 0;                 // original
     control_msg.twist.angular.x = 0.0;
     control_msg.twist.angular.y = 0.0;
     control_msg.twist.angular.z = 0.0;
-//    control_msg.frontBrake = -5.0;  // Not required by SNOW-AutoRally
+//    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
     control_msg.header.stamp = ros::Time::now();
     control_msg.sender = "mppi_controller";
     control_pub_.publish(control_msg);
     ros::shutdown(); //No use trying to recover, quitting is the best option.
   }
   else { //Publish the computed control input.
-//    control_msg.throttle = throttle;
+//    control_msg.throttle = throttle;          // original
     control_msg.twist.linear.x = throttle;
     control_msg.twist.linear.y = 0.0;
     control_msg.twist.linear.z = 0.0;
-//    control_msg.steering = steering;
+//    control_msg.steering = steering;          // original
     control_msg.twist.angular.x = 0.0;
     control_msg.twist.angular.y = 0.0;
     control_msg.twist.angular.z = steering;
-//    control_msg.frontBrake = -5.0;  // Not required by SNOW-AutoRally
+//    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
     control_msg.header.stamp = ros::Time::now();
     control_msg.sender = "mppi_controller";
     control_pub_.publish(control_msg);

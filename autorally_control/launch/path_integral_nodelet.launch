@@ -2,14 +2,19 @@
   <include file="$(find autorally_core)/launch/hardware.machine" />
 
   <node
-    pkg = "nodelet" 
-    type = "nodelet" 
+    pkg = "nodelet"
+    type = "nodelet"
     name = "mppi_controller"
     args = "load autorally_control/MPPINodelet autorally_core_manager"
     output = "screen">
-    
+
     <!--Pose topic configuration parameters -->
-    <param name="pose_estimate" value="/ground_truth/state" />
+    <!-- ...SNOW-AutoRally refactoring.............................................................................. -->
+    <!--    <param name="pose_estimate" value="/ground_truth/state" />-->
+    <param name="pose_estimate" value="/icp_odom" />
+
+    <!-- ..........................................................................SNOW-AutoRally refactoring END... -->
+
     <param name="path_topic" value="/mppi_controller/nominal_path" />
 
     <!--Debug/Sim mode parameter -->
@@ -61,15 +66,15 @@
   </node>
 
   <node
-    pkg = "autorally_control" 
-    type = "path_integral_monitor" 
+    pkg = "autorally_control"
+    type = "path_integral_monitor"
     name = "mppi_monitor"
     output = "screen">
   </node>
 
   <node
-    pkg = "autorally_control" 
-    type = "lap_stats.py" 
+    pkg = "autorally_control"
+    type = "lap_stats.py"
     name = "stat_tracker"
     output = "screen">
     <param name="controller_type" value="mppi_controller" />
