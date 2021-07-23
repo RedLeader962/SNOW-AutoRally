@@ -32,6 +32,7 @@ def gen_costmap(input_img, config_file, output_name):
     ref: https://github.com/RedLeader962/SNOW_AutoRally/tree/SNOW-melodic-devel/autorally_control/src/path_integral
     /params/maps
 
+
     :param input_img: the image of the race circuit
     :param config_file: costmap configuration file
     :type config_file: dict
