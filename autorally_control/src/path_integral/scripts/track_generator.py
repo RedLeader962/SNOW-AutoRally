@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import numpy as np
 from PIL import Image
 import argparse
@@ -7,16 +9,24 @@ def gen_costmap(input_img, config_file, output_name):
     """ Take an image of the the race track and a configuration file and output a costmap
 
     The configuration file require the following keys:
-        - imageRotation: int angle in degrees counter clockwise
-        - flip: bool
-        - xBounds: float horizontal bounds of the costmap, described in meters from the origin
-        - yBounds: float vertical bounds of the costmap, described in meters from the origin
+        - imageRotation: int angle in degrees counter clockwise.
+            Note: Rotate the image so that the origin is in the top left corner
+        - flip: bool switch up/down
+        - xBounds: [x_min:float, x_max:float] horizontal bounds of the costmap, described in meters from the origin
+        - yBounds: [y_min:float, y_max:float] vertical bounds of the costmap, described in meters from the origin
         - pixelsPerMeter: float The number of pixels in a meter
 
     Size of the costmap in pixels:
                     pixelsPerMeter^2 * (x_max - x_min) * (y_max - y_min)
 
     ref: https://github.com/RedLeader962/SNOW_AutoRally/tree/SNOW-melodic-devel/autorally_control/src/path_integral/params/maps
+
+    Note:
+        - The `channel0` key is added by the script and represent are of the race track. Values of zero indicate
+        the track centerline, and values of 1.0 indicate the track boundary. Anything between 0 and 1 is a location
+        on the track, and anything above 1.0 defines a region outside the boundaries.
+        - The `channel1`, `channel2` and `channel3` keys are set to zeros but can be modified to add more data used by
+         other classes.
 
     :param input_img: the image of the race circuit
     :param config_file: costmap configuration file
