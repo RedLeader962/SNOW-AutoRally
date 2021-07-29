@@ -28,9 +28,15 @@ def gen_costmap(input_img, config_file, output_name):
         on the track, and anything above 1.0 defines a region outside the boundaries.
         - The `channel1`, `channel2` and `channel3` keys are set to zeros but can be modified to add more data used by
          other classes.
+        - Channel correspondance:
+            `channel0` <==> red
+            `channel1` <==> green
+            `channel2` <==> blue
+            `channel3` <==> alpha
 
     ref: https://github.com/RedLeader962/SNOW_AutoRally/tree/SNOW-melodic-devel/autorally_control/src/path_integral
     /params/maps
+
 
     :param input_img: the image of the race circuit
     :param config_file: costmap configuration file
@@ -41,8 +47,11 @@ def gen_costmap(input_img, config_file, output_name):
     """
     dict_file = config_file
 
-    with open(dict_file, 'r') as inf:
-        config_dict = eval(inf.read())
+    if type(dict_file) is dict:
+        config_dict = dict_file
+    else:
+        with open(dict_file, 'r') as inf:
+            config_dict = eval(inf.read())
 
     data = Image.open(input_img)
 

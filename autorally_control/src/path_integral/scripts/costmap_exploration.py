@@ -25,23 +25,22 @@ def print_costmap_eda(costmap_path):
 
             if each_i == 'pixelsPerMeter' or each_i == 'xBounds' or each_i == 'yBounds':
                 print spacer, each_i, each_v
-            if each_i == 'channel0':
+            elif each_i == 'channel0':
                 print spacer, each_i, ": shape=", each_v.shape, "min=", each_v.min(), "max=", each_v.max()
 
                 channel = costmap_data['channel0']
                 img = channel.reshape((w, h))
                 img = np.array(img*255, dtype=np.uint8)
                 img = Image.fromarray(img)
-                img.save("channel_preview/"+path[:-4]+"_channel0.jpg")
-            if each_i == 'channel1':
+                img.save("channel_preview/" + path[:-4] + "_channel0.jpg")
+            elif each_i == 'channel1':
                 print spacer, each_i, ": shape=", each_v.shape, "min=", each_v.min(), "max=", each_v.max()
 
                 channel = costmap_data['channel1']
                 img = channel.reshape((w, h))
                 img = np.array(img, dtype=np.uint8)
                 img = Image.fromarray(img)
-                img.save("channel_preview/"+path[:-4]+"_channel1.jpg")
-
+                img.save("channel_preview/" + path[:-4] + "_channel1.jpg")
             else:
                 print spacer, each_i, ": shape=", each_v.shape, "min=", each_v.min(), "max=", each_v.max()
 
@@ -51,19 +50,20 @@ def print_costmap_eda(costmap_path):
 
 
 if __name__ == '__main__':
-    gaz_map_path = (
-        '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps/gazebo/gazebo_map.npz')
-    mar_costmap_2018_path = (
-        '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps/marietta_costmap_09_08_2018.npz')
-    gaz_costmap_path = (
-        '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps/gazebo_costmap_05_22_2016.npz')
-    mar_costmap_2015_path = (
-        '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps/marietta_costmap_12_06_2015.npz')
-    ccrf_costmap_2017_path = (
-        '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps/ccrf_costmap_09_29_2017.npz')
+
+    # SRC_PATH = '/catkin_ws/src/SNOW_AutoRally/autorally_control/src/path_integral/params/maps'
+    SRC_PATH = '/Users/redleader/PycharmProjects/SNOW_AutoRally/autorally_control/src/path_integral/params/maps'
+
+    gaz_map_path = (os.path.join(SRC_PATH, 'gazebo/gazebo_map.npz'))
+    mar_costmap_2018_path = (os.path.join(SRC_PATH, 'marietta_costmap_09_08_2018.npz'))
+    # gaz_costmap_path = (os.path.join(SRC_PATH, 'gazebo_costmap_05_22_2016.npz'))
+    # mar_costmap_2015_path = (os.path.join(SRC_PATH, 'marietta_costmap_12_06_2015.npz'))
+    # ccrf_costmap_2017_path = (os.path.join(SRC_PATH, 'ccrf_costmap_09_29_2017.npz'))
+    NLSAR_exp1_costmap_path = (os.path.join(SRC_PATH, 'NLSAR_exp1_costmap.npz'))
 
     print_costmap_eda(gaz_map_path)
     print_costmap_eda(mar_costmap_2018_path)
+    print_costmap_eda(NLSAR_exp1_costmap_path)
     # print_costmap_eda(gaz_costmap_path)
     # print_costmap_eda(mar_costmap_2015_path)
     # print_costmap_eda(ccrf_costmap_2017_path)
