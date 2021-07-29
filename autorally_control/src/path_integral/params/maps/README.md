@@ -1,5 +1,8 @@
 # Data Format
 
+See `autorally_control/src/path_integral/scripts/track_generator.py` docstring for more details. You can use the
+`autorally_control/src/path_integral/scripts/costmap_introspection.py` to gain insight on the `.npz` files field.
+
 This folder contains contains costmaps used by MPPI in order to drive within the track boundaries. Each costmap contains the same data, but for a different track. The data arrays contained in the numpy archives, and each archive has the following keys point got a numpy array:
 
 ## xBounds, yBounds 
@@ -14,7 +17,16 @@ This channel contains the actual values describing the track surface. It is stor
 ## channel1, channel2, channel3 
 These channels are currently all zero. They can be modified in order to include additional data about the track that can be used by classes inheriting from costs.cu.
 
+
+
 # Maps
+
+## NLSAR_exp1_costmap.npz
+Map of SNOW-AutoRally experiment 1 at University Laval (the used snow pit). 
+Width: ~28 meters
+Height: ~18 meters
+4 channel (RGBa) with only the channel0 (the red channel) being used for now
+See `autorally_control/src/path_integral/scripts/generate_NLSAR_exp1_costmap.py` docstring for more details.
 
 ## gazebo_costmap_05_22_2016.npz
 Map of the gazebo simulation environment. Origin is the same as the spawn point for the car.

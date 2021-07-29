@@ -8,19 +8,23 @@ import argparse
 def gen_costmap(input_img, config_file, output_name):
     """ Take an image of the race track plus a configuration file and output a costmap file in .npz
 
-    `input_img` is a bird eye view picture of the race track oriented with the origin in the top left corner.
-        Note: The `origin` is the starting lane of the real racetrack and the respawn location of the robot in
-        simulation.
+    The size of the `input_img` in pixels: $pixelsPerMeter^2 * (x_max - x_min) * (y_max - y_min)$
 
-        Size of the input_img in pixels: $pixelsPerMeter^2 * (x_max - x_min) * (y_max - y_min)$
+    `input_img` is a bird eye view picture of the race track. For the autorally case, the image must be oriented such
+        that the origin is in the top left corner. Note: The `origin` is the starting lane of the real racetrack or the
+        respawn location of the robot when run in simulation.
 
     `config_file` is a dictionary requiring the following keys:
-        - `imageRotation`: int angle in degrees counter clockwise.
-        - `flip`: bool switch up/down
         - `xBounds`: [x_min:float, x_max:float] horizontal bounds of the costmap, described in meters from the origin
             (aka distance beetwen the origin and the edge of the input_img)
         - `yBounds`: [y_min:float, y_max:float] vertical bounds of the costmap, described in meters from the origin
         - `pixelsPerMeter`: float The number of pixels in a meter
+        - `imageRotation`: int angle in degrees counter clockwise.
+        - `flip`: bool switch up/down
+        - `rOffset`, `gOffset`, `bOffset` and `aOffset`: used to offset the color space per channel
+        - `rNormalizer`, `gNormalizer`, `bNormalizer` and `aNormalizer`: used to change the amplitude of the color space
+            per channel eg. 0:255 with rNormalizer=127.5 give a color space on the intervalle 0:2
+        - `channelMap`: Used change chanell assignement
 
     Note:
         - The `channel0` key is added by the script and represent are of the race track. Values of zero indicate
@@ -40,7 +44,7 @@ def gen_costmap(input_img, config_file, output_name):
 
     :param input_img: the image of the race circuit
     :param config_file: costmap configuration file
-    :type config_file: dict
+    :type config_file: dict or path to a .txt file
     :param output_name: the name of the outputed costmap
     :type output_name: str
     :rtype: None
