@@ -14,6 +14,7 @@
         <param name="pose_estimate" value="/control_odom"/>
 
         <!-- ..........................................................................SNOW-AutoRally refactoring END... -->
+
         <param name="path_topic" value="/mppi_controller/nominal_path"/>
 
         <!--Debug/Sim mode parameter -->
@@ -84,6 +85,7 @@
         <param name="tag" value="Neural Network Model - Path Integral"/>
     </node>
 
+    <!-- NLSAR | Warthog   -->
     <node
             pkg="icp_odom_with_twist"
             type="icp_odom_with_twist_node"
