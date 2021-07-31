@@ -56,7 +56,7 @@
 
 // ❯❯❯ SNOW-AutoRally refactor ❯❯❯......................................................................................
 #include <geometry_msgs/Twist.h>
-#include <autorally_msgs/hri_cmd_vel.h>
+#include <autorally_msgs/mppi_cmd_vel.h>
 // ......................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
 
 #include <opencv2/highgui/highgui.hpp>

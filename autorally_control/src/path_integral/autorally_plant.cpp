@@ -54,7 +54,7 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   //Initialize the publishers.
   // ❯❯❯ SNOW-AutoRally refactor ❯❯❯....................................................................................
 //  control_pub_ = mppi_node.advertise<autorally_msgs::chassisCommand>("chassisCommand", 1);
-  control_pub_ = mppi_node.advertise<autorally_msgs::hri_cmd_vel>("hri_cmd_vel", 1);
+  control_pub_ = mppi_node.advertise<autorally_msgs::mppi_cmd_vel>("mppi_cmd_vel", 1);
   // ....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   path_pub_ = mppi_node.advertise<nav_msgs::Path>("nominalPath", 1);
   subscribed_pose_pub_ = mppi_node.advertise<nav_msgs::Odometry>("subscribedPose", 1);
@@ -376,7 +376,7 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
 
 void AutorallyPlant::pubControl(float steering, float throttle)
 {
-  autorally_msgs::hri_cmd_vel control_msg; ///< SNOW-Autorally control message initialization.
+  autorally_msgs::mppi_cmd_vel control_msg; ///< SNOW-Autorally control message initialization.
   //Publish the steering and throttle commands
   if (std::isnan(throttle) || std::isnan(steering)){ //Nan control publish zeros and exit.
     ROS_INFO("NaN Control Input Detected");

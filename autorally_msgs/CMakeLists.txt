@@ -16,7 +16,7 @@ add_message_files(
   FILES
   chassisCommand.msg
   # ❯❯❯ SNOW-AutoRally refactor ❯❯❯.....................................................................................
-  hri_cmd_vel.msg
+  mppi_cmd_vel.msg
   # .....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   chassisState.msg
   wheelSpeeds.msg
