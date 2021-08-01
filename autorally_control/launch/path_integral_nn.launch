@@ -9,8 +9,8 @@
 
     <!--Pose topic configuration parameters -->
     <!-- ...SNOW-AutoRally refactoring.............................................................................. -->
-    <!--    <param name="pose_estimate" value="/ground_truth/state"/>-->
-    <param name="pose_estimate" value="/icp_odom" />
+        <param name="pose_estimate" value="/ground_truth/state"/>
+<!--    <param name="pose_estimate" value="/icp_odom" />-->
 
     <!-- ..........................................................................SNOW-AutoRally refactoring END... -->
     <param name="path_topic" value="/mppi_controller/nominal_path" />
