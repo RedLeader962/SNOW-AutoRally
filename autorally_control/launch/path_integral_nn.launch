@@ -19,7 +19,8 @@
     <param name="debug_mode" value="true" />
 
     <!--Setup parameters-->
-    <param name="hz" value="50" />
+<!--     <param name="hz" value="50" /> -->
+    <param name="hz" value="20" />
     <param name="num_timesteps" value="100" />
     <param name="x_pos" value="0.0" />
     <param name="y_pos" value="0.0" />
@@ -30,9 +31,11 @@
 
     <!--Model parameters-->
     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz" />
+<!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn.npz"/> -->
 
     <!-- Control hyper-parameters-->
-    <param name="gamma" value=".15" />
+<!--     <param name="gamma" value=".15" /> -->
+    <param name="gamma" value="100" />
     <param name="num_iters" value="1" />
 
     <!-- Control parameters -->
@@ -61,8 +64,8 @@
     <param name="boundary_threshold" value="0.65" />
     <param name="discount" value = "0.9" />
     <!--     <param name="map_path" value="$(env AR_MPPI_PARAMS_PATH)/maps/marietta_costmap_09_08_2018.npz" /> -->
-    <param name="map_path" value="$(env AR_MPPI_PARAMS_PATH)/maps/gazebo_costmap_05_22_2016.npz" />
-<!--    <param name="map_path" value="$(env AR_MPPI_PARAMS_PATH)/maps/NLSAR_exp1_costmap.npz" />-->
+<!--     <param name="map_path" value="$(env AR_MPPI_PARAMS_PATH)/maps/gazebo_costmap_05_22_2016.npz" /> -->
+   <param name="map_path" value="$(env AR_MPPI_PARAMS_PATH)/maps/NLSAR_exp1_costmap.npz" />
 
   </node>
 
