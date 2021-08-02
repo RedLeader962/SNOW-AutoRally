@@ -389,17 +389,17 @@ void AutorallyPlant::pubControl(float steering, float throttle)
 
     // ...prepare mppi_cmd_vel msg..................................................................................
 //    control_msg.throttle = -.99;              // original
-    mppiCmdVel.Twist_.linear.x = -.99;
-    mppiCmdVel.Twist_.linear.y = 0.0;
-    mppiCmdVel.Twist_.linear.z = 0.0;
+    mppiCmdVel.linear.x = -.99;
+    mppiCmdVel.linear.y = 0.0;
+    mppiCmdVel.linear.z = 0.0;
 //    control_msg.steering = 0;                 // original
-    mppiCmdVel.Twist_.angular.x = 0.0;
-    mppiCmdVel.Twist_.angular.y = 0.0;
-    mppiCmdVel.Twist_.angular.z = 0.0;
+    mppiCmdVel.angular.x = 0.0;
+    mppiCmdVel.angular.y = 0.0;
+    mppiCmdVel.angular.z = 0.0;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
 
     // ...prepare mppi_cmd_vel_head msg.............................................................................
-    mppiCmdVelHead.twist = mppiCmdVel.Twist_;
+    mppiCmdVelHead.twist = mppiCmdVel;
     mppiCmdVelHead.header.stamp = ros::Time::now();
     mppiCmdVelHead.sender = "mppi_controller";
 
@@ -410,17 +410,17 @@ void AutorallyPlant::pubControl(float steering, float throttle)
   else { //Publish the computed control input.
     // ...prepare mppi_cmd_vel msg..................................................................................
 //    control_msg.throttle = throttle;          // original/
-    mppiCmdVel.Twist_.linear.x = throttle;
-    mppiCmdVel.Twist_.linear.y = 0.0;
-    mppiCmdVel.Twist_.linear.z = 0.0;
+    mppiCmdVel.linear.x = throttle;
+    mppiCmdVel.linear.y = 0.0;
+    mppiCmdVel.linear.z = 0.0;
 //    control_msg.steering = steering;          // original
-    mppiCmdVel.Twist_.angular.x = 0.0;
-    mppiCmdVel.Twist_.angular.y = 0.0;
-    mppiCmdVel.Twist_.angular.z = steering;
+    mppiCmdVel.angular.x = 0.0;
+    mppiCmdVel.angular.y = 0.0;
+    mppiCmdVel.angular.z = steering;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
 
     // ...prepare mppi_cmd_vel_head msg.............................................................................
-    mppiCmdVelHead.twist = mppiCmdVel.Twist_;
+    mppiCmdVelHead.twist = mppiCmdVel;
     mppiCmdVelHead.header.stamp = ros::Time::now();
     mppiCmdVelHead.sender = "mppi_controller";
 
