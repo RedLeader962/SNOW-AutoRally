@@ -57,8 +57,8 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   //Initialize the publishers.
   // ❯❯❯ SNOW-AutoRally refactor ❯❯❯....................................................................................
 //  control_pub_ = mppi_node.advertise<autorally_msgs::chassisCommand>("chassisCommand", 1);
-  control_pub_head_ = mppi_node.advertise<autorally_msgs::mppi_cmd_vel_head>("mppi_cmd_vel_head", 1);
   control_pub_ = mppi_node.advertise<geometry_msgs::Twist>("mppi_cmd_vel", 1);
+  control_pub_head_ = mppi_node.advertise<autorally_msgs::mppi_cmd_vel_head>("mppi_cmd_vel_head", 1);
   // ....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   path_pub_ = mppi_node.advertise<nav_msgs::Path>("nominalPath", 1);
   subscribed_pose_pub_ = mppi_node.advertise<nav_msgs::Odometry>("subscribedPose", 1);
@@ -425,7 +425,7 @@ void AutorallyPlant::pubControl(float steering, float throttle)
     mppiCmdVelHead.sender = "mppi_controller";
 
     control_pub_.publish(mppiCmdVel);
-    control_pub_.publish(mppiCmdVelHead);
+    control_pub_head_.publish(mppiCmdVelHead);
   }
 }
 
