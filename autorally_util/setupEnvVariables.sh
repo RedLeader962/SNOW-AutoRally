@@ -23,6 +23,8 @@ echo "$0 | step 1: Get list of devices and locate config folder" # TODO: remove 
 
 if [[ $MASTER_HOSTNAME == "localhost" ]]; then
   devList=$(ls /dev/)
+elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
+  devList=$(ls /dev/)
 else
   devList=$(ssh $MASTER_HOSTNAME ls /dev/)
 fi
@@ -68,6 +70,8 @@ IFS=$'\n'
 if [[ $MASTER_HOSTNAME == "localhost" ]]; then
   # Use lsusb to find all PointGrey Flea3 cameras plugged in right now
   camList=($(lsusb | grep '1e10:\(3300\|300a\)'))
+elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
+  continue
 else
   #camList=$(ssh $MASTER_HOSTNAME ls /dev/)
   camList=($(ssh $MASTER_HOSTNAME lsusb | grep '1e10:\(3300\|300a\)'))
@@ -86,6 +90,8 @@ for ((i = 0; i < ${#camList[@]}; i++)); do
 
   ## Query device for hexadecimal serial number
   if [[ $MASTER_HOSTNAME == "localhost" ]]; then
+    SERIAL=$(udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')
+  elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
     SERIAL=$(udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')
   else
     SERIAL=$(ssh $MASTER_HOSTNAME udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')

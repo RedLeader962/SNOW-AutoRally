@@ -335,7 +335,7 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
     pose.pose.orientation.y = q2;
     pose.pose.orientation.z = q3;
     pose.header.stamp = begin + ros::Duration(i*deltaT_);
-    pose.header.frame_id = "odom";
+    pose.header.frame_id = "map";
     path_msg_.poses.push_back(pose);
     if (i == 0){
       subscribed_state.pose.pose = pose.pose;
@@ -345,9 +345,9 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
     }
   }
   subscribed_state.header.stamp = begin;
-  subscribed_state.header.frame_id = "odom";
+  subscribed_state.header.frame_id = "map";
   path_msg_.header.stamp = begin;
-  path_msg_.header.frame_id = "odom";
+  path_msg_.header.frame_id = "map";
   path_pub_.publish(path_msg_);
   subscribed_pose_pub_.publish(subscribed_state);
 }
