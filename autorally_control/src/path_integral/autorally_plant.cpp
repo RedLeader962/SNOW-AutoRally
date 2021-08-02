@@ -37,10 +37,10 @@
 
 namespace autorally_control {
 
-AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi_node, 
+AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi_node,
                                bool debug_mode, int hz, bool nodelet)
 {
-  nodeNamespace_ = mppi_node.getNamespace(); 
+  nodeNamespace_ = mppi_node.getNamespace();
   std::string pose_estimate_name = getRosParam<std::string>("pose_estimate", mppi_node);
   debug_mode_ = getRosParam<bool>("debug_mode", mppi_node);
   numTimesteps_ = getRosParam<int>("num_timesteps", mppi_node);
@@ -54,13 +54,14 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   //Initialize the publishers.
   // ❯❯❯ SNOW-AutoRally refactor ❯❯❯....................................................................................
 //  control_pub_ = mppi_node.advertise<autorally_msgs::chassisCommand>("chassisCommand", 1);
-  control_pub_ = mppi_node.advertise<autorally_msgs::mppi_cmd_vel>("mppi_cmd_vel", 1);
+  control_pub_head_ = mppi_node.advertise<autorally_msgs::mppi_cmd_vel_head>("mppi_cmd_vel_head", 1);
+  control_pub_ = mppi_node.advertise<geometry_msgs::Twist>("mppi_cmd_vel", 1);
   // ....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
   path_pub_ = mppi_node.advertise<nav_msgs::Path>("nominalPath", 1);
   subscribed_pose_pub_ = mppi_node.advertise<nav_msgs::Odometry>("subscribedPose", 1);
   status_pub_ = mppi_node.advertise<autorally_msgs::pathIntegralStatus>("mppiStatus", 1);
   timing_data_pub_ = mppi_node.advertise<autorally_msgs::pathIntegralTiming>("timingInfo", 1);
-  
+
   //Initialize the subscribers.
   pose_sub_ = global_node.subscribe(pose_estimate_name, 1, &AutorallyPlant::poseCall, this,
                                   ros::TransportHints().tcpNoDelay());
@@ -78,7 +79,7 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   activated_ = false;
   new_model_available_ = false;
   last_pose_call_ = ros::Time::now();
-  
+
   //Initialize yaw derivative to zero
   full_state_.yaw_mder = 0.0;
   status_ = 1;
@@ -104,7 +105,7 @@ AutorallyPlant::AutorallyPlant(ros::NodeHandle global_node, ros::NodeHandle mppi
   }
 }
 
-void AutorallyPlant::setSolution(std::vector<float> traj, std::vector<float> controls, 
+void AutorallyPlant::setSolution(std::vector<float> traj, std::vector<float> controls,
                                 util::EigenAlignedVector<float, 2, 7> gains,
                                 ros::Time ts, double loop_speed)
 {
@@ -152,7 +153,7 @@ void AutorallyPlant::displayDebugImage(const ros::TimerEvent&)
       boost::mutex::scoped_lock lock(access_guard_);
       cv::namedWindow(nodeNamespace_, cv::WINDOW_AUTOSIZE);
       cv::imshow(nodeNamespace_, debugImg_);
-    } 
+    }
   }
   if (receivedDebugImg_.load() && !is_nodelet_){
     cv::waitKey(1);
@@ -232,7 +233,7 @@ void AutorallyPlant::poseCall(nav_msgs::Odometry pose_msg)
       for (int i = 0; i < 7; i++){
         desired_state(i) = (1 - alpha)*stateSequence_[7*lowerIdx + i] + alpha*stateSequence_[7*upperIdx + i];
       }
-      
+
       deltaU = ((1-alpha)*feedback_gains_[lowerIdx] + alpha*feedback_gains_[upperIdx])*(current_state - desired_state);
 
       if (std::isnan( deltaU(0) ) || std::isnan( deltaU(1))){
@@ -325,7 +326,7 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
     q0 = cos(phi/2)*cos(theta/2)*cos(psi/2) + sin(phi/2)*sin(theta/2)*sin(psi/2);
     q1 = -cos(phi/2)*sin(theta/2)*sin(psi/2) + cos(theta/2)*cos(psi/2)*sin(phi/2);
     q2 = cos(phi/2)*cos(psi/2)*sin(theta/2) + sin(phi/2)*cos(theta/2)*sin(psi/2);
-    q3 = cos(phi/2)*cos(theta/2)*sin(psi/2) - sin(phi/2)*cos(psi/2)*sin(theta/2); 
+    q3 = cos(phi/2)*cos(theta/2)*sin(psi/2) - sin(phi/2)*cos(psi/2)*sin(theta/2);
     pose.pose.orientation.w = q0;
     pose.pose.orientation.x = q1;
     pose.pose.orientation.y = q2;
@@ -376,37 +377,52 @@ void AutorallyPlant::pubPath(const ros::TimerEvent&)
 
 void AutorallyPlant::pubControl(float steering, float throttle)
 {
-  autorally_msgs::mppi_cmd_vel control_msg; ///< SNOW-Autorally control message initialization.
+  //message initialization
+  geometry_msgs::Twist mppiCmdVel;
+  autorally_msgs::mppi_cmd_vel_head mppiCmdVelHead;
   //Publish the steering and throttle commands
   if (std::isnan(throttle) || std::isnan(steering)){ //Nan control publish zeros and exit.
     ROS_INFO("NaN Control Input Detected");
+
+    // ...prepare mppi_cmd_vel msg..................................................................................
 //    control_msg.throttle = -.99;              // original
-    control_msg.twist.linear.x = -.99;
-    control_msg.twist.linear.y = 0.0;
-    control_msg.twist.linear.z = 0.0;
+    mppiCmdVel.twist.linear.x = -.99;
+    mppiCmdVel.twist.linear.y = 0.0;
+    mppiCmdVel.twist.linear.z = 0.0;
 //    control_msg.steering = 0;                 // original
-    control_msg.twist.angular.x = 0.0;
-    control_msg.twist.angular.y = 0.0;
-    control_msg.twist.angular.z = 0.0;
+    mppiCmdVel.twist.angular.x = 0.0;
+    mppiCmdVel.twist.angular.y = 0.0;
+    mppiCmdVel.twist.angular.z = 0.0;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
-    control_msg.header.stamp = ros::Time::now();
-    control_msg.sender = "mppi_controller";
-    control_pub_.publish(control_msg);
+
+    // ...prepare mppi_cmd_vel_head msg.............................................................................
+    mppiCmdVelHead.twist = mppiCmdVel.twist;
+    mppiCmdVelHead.header.stamp = ros::Time::now();
+    mppiCmdVelHead.sender = "mppi_controller";
+
+    control_pub_.publish(mppiCmdVel);
+    control_pub_head_.publish(mppiCmdVelHead);
     ros::shutdown(); //No use trying to recover, quitting is the best option.
   }
   else { //Publish the computed control input.
-//    control_msg.throttle = throttle;          // original
-    control_msg.twist.linear.x = throttle;
-    control_msg.twist.linear.y = 0.0;
-    control_msg.twist.linear.z = 0.0;
+    // ...prepare mppi_cmd_vel msg..................................................................................
+//    control_msg.throttle = throttle;          // original/
+    mppiCmdVel.twist.linear.x = throttle;
+    mppiCmdVel.twist.linear.y = 0.0;
+    mppiCmdVel.twist.linear.z = 0.0;
 //    control_msg.steering = steering;          // original
-    control_msg.twist.angular.x = 0.0;
-    control_msg.twist.angular.y = 0.0;
-    control_msg.twist.angular.z = steering;
+    mppiCmdVel.twist.angular.x = 0.0;
+    mppiCmdVel.twist.angular.y = 0.0;
+    mppiCmdVel.twist.angular.z = steering;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
-    control_msg.header.stamp = ros::Time::now();
-    control_msg.sender = "mppi_controller";
-    control_pub_.publish(control_msg);
+
+    // ...prepare mppi_cmd_vel_head msg.............................................................................
+    mppiCmdVelHead.twist = mppiCmdVel.twist;
+    mppiCmdVelHead.header.stamp = ros::Time::now();
+    mppiCmdVelHead.sender = "mppi_controller";
+
+    control_pub_.publish(mppiCmdVel);
+    control_pub_.publish(mppiCmdVelHead);
   }
 }
 

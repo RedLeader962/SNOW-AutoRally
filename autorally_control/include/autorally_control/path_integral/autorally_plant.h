@@ -56,7 +56,7 @@
 
 // ❯❯❯ SNOW-AutoRally refactor ❯❯❯......................................................................................
 #include <geometry_msgs/Twist.h>
-#include <autorally_msgs/mppi_cmd_vel.h>
+#include <autorally_msgs/mppi_cmd_vel_head.h>
 // ......................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
 
 #include <opencv2/highgui/highgui.hpp>
@@ -256,7 +256,8 @@ protected:
 
   ros::Time last_pose_call_; ///< Timestamp of the last pose callback.
 
-  ros::Publisher control_pub_; ///< Publisher of autorally_msgs::chassisCommand type on topic servoCommand.
+  ros::Publisher control_pub_head_; ///< Publisher of autorally_msgs::mppi_cmd_vel_head type on topic servoCommand (required by AutoRally)
+  ros::Publisher control_pub_; ///< Publisher of geometry_msgs::Twist type on topic servoCommand (required by the Warthog main computer)
   ros::Publisher status_pub_; ///< Publishes the status (0 good, 1 neutral, 2 bad) of the controller
   ros::Publisher subscribed_pose_pub_; ///< Publisher of the subscribed pose
   ros::Publisher path_pub_; ///< Publisher of nav_mags::Path on topic nominalPath.
@@ -274,9 +275,9 @@ protected:
   autorally_msgs::pathIntegralStatus status_msg_; ///<pathIntegralStatus message for publishing mppi status
   autorally_msgs::pathIntegralTiming timingData_; ///<pathIntegralStatus message for publishing mppi status
 
-  // ❯❯❯ SNOW-AutoRally refactoring ❯❯❯.................................................................................
-//  geometry_msgs::Twist hri_cmd_vel_msg_; ///< SNOW-AutoRally Command velocity message .
-  // .................................................................................❮❮❮ SNOW-AutoRally refactoring ❮❮❮
+//  // ❯❯❯ SNOW-AutoRally refactoring ❯❯❯.................................................................................
+//  geometry_msgs::Twist mppi_cmd_vel_head_msg_; ///< SNOW-AutoRally Command velocity message .
+//  // .................................................................................❮❮❮ SNOW-AutoRally refactoring ❮❮❮
 
 
 };

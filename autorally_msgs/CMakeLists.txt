@@ -2,43 +2,41 @@ cmake_minimum_required(VERSION 3.10)
 project(autorally_msgs)
 
 find_package(catkin REQUIRED COMPONENTS
-  genmsg
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  diagnostic_msgs
-)
+        genmsg
+        std_msgs
+        sensor_msgs
+        geometry_msgs
+        diagnostic_msgs
+        )
 
 find_package(Boost REQUIRED thread)
 
 add_message_files(
-  DIRECTORY msg
-  FILES
-  chassisCommand.msg
-  # ❯❯❯ SNOW-AutoRally refactor ❯❯❯.....................................................................................
-  mppi_cmd_vel.msg
-  # .....................................................................................❮❮❮ SNOW-AutoRally refactor ❮❮❮
-  chassisState.msg
-  wheelSpeeds.msg
-  runstop.msg
-  imageMask.msg
-  line2D.msg
-  point2D.msg
-  stateEstimatorStatus.msg
-  pathIntegralParams.msg
-  lapStats.msg
-  pathIntegralStats.msg
-  pathIntegralStatus.msg
-  pathIntegralTiming.msg
-  neuralNetLayer.msg
-  neuralNetModel.msg
+        DIRECTORY msg
+        FILES
+        chassisCommand.msg
+        mppi_cmd_vel_head.msg     # ❯❯❯ SNOW-AutoRally refactor
+        chassisState.msg
+        wheelSpeeds.msg
+        runstop.msg
+        imageMask.msg
+        line2D.msg
+        point2D.msg
+        stateEstimatorStatus.msg
+        pathIntegralParams.msg
+        lapStats.msg
+        pathIntegralStats.msg
+        pathIntegralStatus.msg
+        pathIntegralTiming.msg
+        neuralNetLayer.msg
+        neuralNetModel.msg
 )
 
 generate_messages(DEPENDENCIES
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  diagnostic_msgs
-)
+        std_msgs
+        sensor_msgs
+        geometry_msgs
+        diagnostic_msgs
+        )
 
 catkin_package()
