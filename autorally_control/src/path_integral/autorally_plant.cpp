@@ -30,7 +30,10 @@
  * @copyright 2017 Georgia Institute of Technology
  * @brief Implementation of the AutorallyPlant class
  ***********************************************/
-#include <autorally_control/path_integral/autorally_plant.h>
+//#include <autorally_control/path_integral/autorally_plant.h>
+#include "../../include/autorally_control/path_integral/autorally_plant.h"
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
