@@ -389,17 +389,17 @@ void AutorallyPlant::pubControl(float steering, float throttle)
 
     // ...prepare mppi_cmd_vel msg..................................................................................
 //    control_msg.throttle = -.99;              // original
-    mppiCmdVel.Twist.linear.x = -.99;
-    mppiCmdVel.Twist.linear.y = 0.0;
-    mppiCmdVel.Twist.linear.z = 0.0;
+    mppiCmdVel.Twist_.linear.x = -.99;
+    mppiCmdVel.Twist_.linear.y = 0.0;
+    mppiCmdVel.Twist_.linear.z = 0.0;
 //    control_msg.steering = 0;                 // original
-    mppiCmdVel.Twist.angular.x = 0.0;
-    mppiCmdVel.Twist.angular.y = 0.0;
-    mppiCmdVel.Twist.angular.z = 0.0;
+    mppiCmdVel.Twist_.angular.x = 0.0;
+    mppiCmdVel.Twist_.angular.y = 0.0;
+    mppiCmdVel.Twist_.angular.z = 0.0;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
 
     // ...prepare mppi_cmd_vel_head msg.............................................................................
-    mppiCmdVelHead.twist = mppiCmdVel.Twist;
+    mppiCmdVelHead.twist = mppiCmdVel.Twist_;
     mppiCmdVelHead.header.stamp = ros::Time::now();
     mppiCmdVelHead.sender = "mppi_controller";
 
@@ -410,17 +410,17 @@ void AutorallyPlant::pubControl(float steering, float throttle)
   else { //Publish the computed control input.
     // ...prepare mppi_cmd_vel msg..................................................................................
 //    control_msg.throttle = throttle;          // original/
-    mppiCmdVel.Twist.linear.x = throttle;
-    mppiCmdVel.Twist.linear.y = 0.0;
-    mppiCmdVel.Twist.linear.z = 0.0;
+    mppiCmdVel.Twist_.linear.x = throttle;
+    mppiCmdVel.Twist_.linear.y = 0.0;
+    mppiCmdVel.Twist_.linear.z = 0.0;
 //    control_msg.steering = steering;          // original
-    mppiCmdVel.Twist.angular.x = 0.0;
-    mppiCmdVel.Twist.angular.y = 0.0;
-    mppiCmdVel.Twist.angular.z = steering;
+    mppiCmdVel.Twist_.angular.x = 0.0;
+    mppiCmdVel.Twist_.angular.y = 0.0;
+    mppiCmdVel.Twist_.angular.z = steering;
 //    control_msg.frontBrake = -5.0;            // Not required by SNOW-AutoRally
 
     // ...prepare mppi_cmd_vel_head msg.............................................................................
-    mppiCmdVelHead.twist = mppiCmdVel.Twist;
+    mppiCmdVelHead.twist = mppiCmdVel.Twist_;
     mppiCmdVelHead.header.stamp = ros::Time::now();
     mppiCmdVelHead.sender = "mppi_controller";
 
