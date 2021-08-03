@@ -31,9 +31,9 @@
     <param name="use_feedback_gains" value="true" />
 
     <!--Model parameters-->
-<!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz" /> -->
+    <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz" />
 <!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn.npz"/> -->
-    <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn_02_08_2021_01.npz"/>
+<!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn_02_08_2021_01.npz"/> -->
 
     <!-- Control hyper-parameters-->
 <!--     <param name="gamma" value=".15" /> -->

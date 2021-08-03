@@ -55,14 +55,14 @@
 <!--         <param name="max_steering" value="0.99"/> -->
         <!-- NLSAR control constraints -->
         <param name="max_throttle" value="2.0"/>
-        <param name="min_throttle" value="0.0"/>
-        <param name="min_steering" value="-1.0"/>
-        <param name="max_steering" value="1.0"/>
+        <param name="min_throttle" value="-0.99"/>
+        <param name="min_steering" value="2.0"/>
+        <param name="max_steering" value="2.0"/>
 
         <!-- Cost Parameters -->
         <param name="l1_cost" value="false"/>
-        <param name="desired_speed" value="1.0"/>
-        <param name="speed_coefficient" value="0.5"/>
+        <param name="desired_speed" value="1.5"/>
+        <param name="speed_coefficient" value="4.25"/>
         <param name="track_coefficient" value="200.0"/>
 <!--         <param name="track_coefficient" value="10.0"/> -->
         <param name="max_slip_angle" value="10.0"/>
