@@ -8,4 +8,5 @@ export HOSTNAME=$(hostname)
 export ROSLAUNCH_SSH_UNKNOWN=1
 # Find directory of script file to avoid hard-coded paths
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source setupEnvVariables.sh
+#source setupEnvVariables.sh
+source $DIR/setupEnvVariables.sh

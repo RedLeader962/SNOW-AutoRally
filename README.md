@@ -5,7 +5,7 @@
 <br>
 </div>
 
-# _/// SNOW-AutoRally //////////////////////////////////////////_
+# _/// SNOW-AutoRally //////////////////////////////_
 A NorLab project based on a fork of the [Georgia Tech AutoRally](https://github.com/AutoRally/autorally) repository 
 
 <div align="left">
