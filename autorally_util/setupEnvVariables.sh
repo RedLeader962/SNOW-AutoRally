@@ -24,6 +24,7 @@ echo "$0 | step 1: Get list of devices and locate config folder" # TODO: remove 
 if [[ $MASTER_HOSTNAME == "localhost" ]]; then
   devList=$(ls /dev/)
 elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
+  # Same as the `localhost` case for now
   devList=$(ls /dev/)
 else
   devList=$(ssh $MASTER_HOSTNAME ls /dev/)
@@ -71,7 +72,7 @@ if [[ $MASTER_HOSTNAME == "localhost" ]]; then
   # Use lsusb to find all PointGrey Flea3 cameras plugged in right now
   camList=($(lsusb | grep '1e10:\(3300\|300a\)'))
 elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
-  continue
+  echo "(cpr-lav07) SNOW-AutoRally | Not registring any camera from the Warthog for now"
 else
   #camList=$(ssh $MASTER_HOSTNAME ls /dev/)
   camList=($(ssh $MASTER_HOSTNAME lsusb | grep '1e10:\(3300\|300a\)'))
@@ -92,6 +93,7 @@ for ((i = 0; i < ${#camList[@]}; i++)); do
   if [[ $MASTER_HOSTNAME == "localhost" ]]; then
     SERIAL=$(udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')
   elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
+    # Same as the `localhost` case for now
     SERIAL=$(udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')
   else
     SERIAL=$(ssh $MASTER_HOSTNAME udevadm info --query=property /dev/bus/usb/$BUS/$DEVICE | grep "ID_SERIAL_SHORT" | sed 's/ID_SERIAL_SHORT=//g')
@@ -154,8 +156,16 @@ fi
 
 if [[ $MASTER_HOSTNAME == "localhost" ]]; then
   export AR_MPPI_PARAMS_PATH=$(rospack find autorally_control)/src/path_integral/params/
+elif [[ $MASTER_HOSTNAME == "cpr-lav07" ]]; then
+  # Same as the `localhost` case for now
+  export AR_MPPI_PARAMS_PATH=$(rospack find autorally_control)/src/path_integral/params/
 else
   export AR_MPPI_PARAMS_PATH=$(ssh $user@$MASTER_HOSTNAME rospack find autorally_control)/src/path_integral/params/
 fi
 
+
 echo "$0 | setupEnvVariables.sh >> done" # TODO: remove line when done
+
+# Quick hack for NLSAR-189 🩹→ Find a secure and permanent solution for the xhost "display not available" problem
+sudo xhost +
+echo $(xhost)
