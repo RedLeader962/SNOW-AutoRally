@@ -25,13 +25,15 @@
     <param name="x_pos" value="0.0" />
     <param name="y_pos" value="0.0" />
     <param name="heading" value="2.35" />
+<!--     <param name="heading" value="0.0" /> -->
     <!-- How many controls are executed between optimization loops -->
     <param name="optimization_stride" value="1" />
     <param name="use_feedback_gains" value="true" />
 
     <!--Model parameters-->
-    <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz" />
+<!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz" /> -->
 <!--     <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn.npz"/> -->
+    <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn_02_08_2021_01.npz"/>
 
     <!-- Control hyper-parameters-->
 <!--     <param name="gamma" value=".15" /> -->
@@ -43,6 +45,8 @@
     <param name="init_throttle" value="0.0" />
     <param name="steering_std" value="0.275" />
     <param name="throttle_std" value="0.3" />
+<!--     <param name="steering_std" value="2.0" /> -->
+<!--     <param name="throttle_std" value="2.0" /> -->
 
     <!-- Control Constraints -->
     <param name="max_throttle" value=".65" />

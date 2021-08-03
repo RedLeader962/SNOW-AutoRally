@@ -55,6 +55,7 @@ namespace autorally_control {
         float steering_std;
         float throttle_std;
         float max_throttle;
+        float min_throttle;
         std::string model_path;
     } SystemParams;
 
