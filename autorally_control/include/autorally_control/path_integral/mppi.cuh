@@ -33,8 +33,8 @@ private:
     AutorallyPlant* robot;
     boost::thread optimizer;
     float2 control_constraints[2];
-    float init_u[2];
-    float exploration_std[2];
+    float init_u[2];                    // [init_steering, init_throttle]
+    float exploration_std[2];           // [steering_std, throttle_std]
     dynamic_reconfigure::Server<PathIntegralParamsConfig> server;
     dynamic_reconfigure::Server<PathIntegralParamsConfig>::CallbackType callback_f;
 };

@@ -299,6 +299,7 @@ inline void MPPICosts::updateCostmap(std::vector<int> description, std::vector<f
 inline void MPPICosts::updateObstacles(std::vector<int> description, std::vector<float> data){}
 
 inline __host__ __device__ void MPPICosts::getCrash(float* state, int* crash) {
+    // Note: pi/2 = 1.57
   if (fabs(state[3]) > 1.57) {
     crash[0] = 1;
   }
