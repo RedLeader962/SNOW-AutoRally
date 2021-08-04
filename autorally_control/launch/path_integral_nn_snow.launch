@@ -11,7 +11,8 @@
         <!-- ...SNOW-AutoRally refactoring.............................................................................. -->
         <!--    <param name="pose_estimate" value="/ground_truth/state"/>-->
         <!--    <param name="pose_estimate" value="/icp_odom"/>-->
-        <param name="pose_estimate" value="/control_odom"/>
+<!--         <param name="pose_estimate" value="/control_odom"/> -->
+        <param name="pose_estimate" value="/imu_and_wheel_odom"/>
 
         <!-- ..........................................................................SNOW-AutoRally refactoring END... -->
 
@@ -21,6 +22,7 @@
         <param name="debug_mode" value="true"/>
 
         <!--Setup parameters-->
+<!--         <param name="hz" value="50"/> -->
         <param name="hz" value="20"/>
         <param name="num_timesteps" value="100"/>
         <param name="x_pos" value="0.0"/>
@@ -28,16 +30,17 @@
         <param name="heading" value="0.0"/>
         <!-- How many controls are executed between optimization loops -->
         <param name="optimization_stride" value="1"/>
+<!--         <param name="use_feedback_gains" value="true"/> -->
         <param name="use_feedback_gains" value="true"/>
 
         <!--Model parameters-->
 <!--         <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/autorally_nnet_09_12_2018.npz"/> -->
-<!--       <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn.npz"/> -->
+<!--       <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn.npz"/>-->
        <param name="model_path" value="$(env AR_MPPI_PARAMS_PATH)/models/norlab_autorally_nn_02_08_2021_01.npz"/>
 
         <!-- Control hyper-parameters-->
-<!--         <param name="gamma" value=".15"/> -->
-        <param name="gamma" value="100"/>
+<!--         <param name="gamma" value="100"/> -->
+        <param name="gamma" value="0.15"/>
         <param name="num_iters" value="1"/>
 
         <!-- Control parameters -->
@@ -57,17 +60,15 @@
         <param name="max_throttle" value="2.0"/>
         <param name="min_throttle" value="0.0"/>
         <param name="min_steering" value="-1.0"/>
-        <param name="max_steering" value="1.0"/>
+        <param name="max_steering" value="2.0"/>
 
         <!-- Cost Parameters -->
         <param name="l1_cost" value="false"/>
-        <param name="desired_speed" value="1.0"/>
-        <param name="speed_coefficient" value="0.5"/>
+        <param name="desired_speed" value="1.5"/>
+        <param name="speed_coefficient" value="4.25"/>
         <param name="track_coefficient" value="200.0"/>
-<!--         <param name="track_coefficient" value="10.0"/> -->
-        <param name="max_slip_angle" value="10.0"/>
-<!--         <param name="slip_penalty" value="10.0"/> -->
-        <param name="slip_penalty" value="0.0"/>
+        <param name="max_slip_angle" value="1.25"/>
+        <param name="slip_penalty" value="10.0"/>
         <param name="track_slop" value="0.0"/>
         <param name="crash_coeff" value="10000.0"/>
         <param name="steering_coeff" value="0.0"/>

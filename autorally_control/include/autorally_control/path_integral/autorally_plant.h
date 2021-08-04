@@ -117,6 +117,9 @@ namespace autorally_control {
 
         float last_heading_ = 0.0;
         float throttleMax_ = 0.99;
+        float throttleMin_ = -0.99;
+        float steeringMax_ = 0.99;
+        float steeringMin_ = -0.99;
         int heading_multiplier_ = 0;
 
         boost::mutex access_guard_;

@@ -49,7 +49,10 @@ namespace autorally_control {
         params->init_throttle = getRosParam<double>("init_throttle", nh);
         params->steering_std = getRosParam<double>("steering_std", nh);
         params->throttle_std = getRosParam<double>("throttle_std", nh);
+        params->min_throttle = getRosParam<double>("min_throttle", nh);
         params->max_throttle = getRosParam<double>("max_throttle", nh);
+        params->min_steering = getRosParam<double>("min_steering", nh);
+        params->max_steering = getRosParam<double>("max_steering", nh);
         params->model_path = getRosParam<std::string>("model_path", nh);
     }
 
